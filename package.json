@@ -1,0 +1,7 @@
+{
+  "name": "codecuda-visualization",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/launchMath.test.js"
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kernel Grid Visualizer</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">CUDA Kernel Visualization</p>
+        <h1>Explicit Grid / Block / Thread Viewer</h1>
+        <p class="intro">
+          Grid size is the explicit number of dispatched blocks. Block size is the explicit number
+          of threads inside each block. Nothing is derived by implicit division.
+        </p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <aside class="controls">
+        <section class="controls-section">
+          <div class="section-heading">
+            <p class="section-kicker">Kernel Usage</p>
+            <h2>GPU Configuration</h2>
+          </div>
+          <section class="summary-card embedded-summary">
+            <div class="summary-label">Configuration</div>
+            <dl id="stats" class="stats"></dl>
+          </section>
+          <div id="gpu-usage-panel" class="gpu-panel"></div>
+        </section>
+      </aside>
+
+      <section class="views">
+        <section class="view-card launch-view-card">
+          <div class="view-header">
+            <div>
+              <h2>Combined Launch View</h2>
+              <p>Resident blocks are packed inside streaming multiprocessors, queued blocks are staged beside them for later waves, and the tiny cubes are resident block threads.</p>
+            </div>
+            <div class="legend">
+              <span><i class="legend-swatch sm"></i> SM wrapper</span>
+              <span><i class="legend-swatch block"></i> Block shell</span>
+              <span><i class="legend-swatch queued"></i> Queued block</span>
+              <span><i class="legend-swatch thread"></i> Thread cube</span>
+              <span><i class="legend-swatch shared"></i> Shared memory</span>
+              <span><i class="legend-swatch selected"></i> Hovered item</span>
+            </div>
+          </div>
+          <div class="view-toolbar">
+            <button id="mode-thread" class="toolbar-button active" type="button">Thread Visualization Mode</button>
+            <button id="mode-warp" class="toolbar-button" type="button">Warp Visualization Mode</button>
+            <label class="toolbar-toggle" for="organize-by-sm">
+              <input id="organize-by-sm" type="checkbox" checked />
+              <span>Organize By SM</span>
+            </label>
+            <label class="toolbar-toggle" for="show-sm-memory">
+              <input id="show-sm-memory" type="checkbox" checked />
+              <span>Show SM Memory</span>
+            </label>
+            <button id="reset-view" class="toolbar-button" type="button">Reset View</button>
+          </div>
+          <div class="launch-info-stack">
+            <div id="combined-info" class="view-note launch-info-primary"></div>
+            <div id="controls-hint" class="view-note launch-info-secondary">Hover to inspect. Left drag rotates, right drag pans, mouse wheel zooms.</div>
+          </div>
+        </section>
+
+        <div class="viewport-row">
+          <section class="view-card viewport-card">
+            <div class="view-header">
+              <div>
+                <h2>3D Viewport</h2>
+                <p>Dedicated panel for the interactive 3D launch visualization.</p>
+              </div>
+            </div>
+            <div id="combined-viewport-shell" class="viewport-shell">
+              <div id="combined-view" class="three-view" role="img" aria-label="Combined launch view"></div>
+            </div>
+          </section>
+
+          <aside class="view-card viewport-controls-card">
+            <div class="section-heading compact">
+              <p class="section-kicker">Launch Controls</p>
+              <h3>Grid And Block Configuration</h3>
+            </div>
+            <div id="control-groups" class="embedded-controls viewport-controls-grid"></div>
+          </aside>
+        </div>
+
+        <section class="view-card hierarchy-card">
+          <div class="view-header">
+            <div>
+              <h2>Hierarchy</h2>
+              <p>One launch shown as nested levels so the structure stays ready for a later 3D view.</p>
+            </div>
+          </div>
+          <div id="hierarchy-view" class="hierarchy-view"></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="./src/launchMath.js"></script>
+  <script src="./vendor/three.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
