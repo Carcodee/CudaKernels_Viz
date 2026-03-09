@@ -1,5 +1,7 @@
 # CodeCuda Visualization
 
+<img width="1532" height="980" alt="image" src="https://github.com/user-attachments/assets/9564261a-10d1-420c-bd0a-066eeb1b8c6a" />
+
 Interactive browser visualization for CUDA-style launch geometry.
 
 This project renders an explicit `grid -> block -> thread` launch model in 3D and keeps the math visible in the UI. Grid size is the number of dispatched blocks. Block size is the number of threads inside each block. Nothing is inferred by implicit division.
